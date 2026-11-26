@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { ArrowDown, ArrowRight, CakeSlice, Check, Clock3, Heart, MapPin, MessageCircle, Sparkles } from 'lucide-react'
 
-const shopWhatsApp = '919876543210' // Replace with the shop's WhatsApp number, including country code.
+const shopWhatsApp = '' // Add the shop's WhatsApp number with country code before accepting orders.
 const flavors = ['Chocolate Truffle', 'Pineapple', 'Black Forest', 'Red Velvet', 'Butterscotch', 'Vanilla', 'Fresh Fruit', 'Custom flavour']
 const cakes = [
   { name: 'Chocolate Truffle', type: 'BESTSELLER', price: '₹450', image: '/cake-hero.png', color: '#f5e8e1', detail: 'Rich, silky & deeply chocolatey' },
@@ -23,6 +23,10 @@ export default function Page() {
 
   function bookCake(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (!shopWhatsApp) {
+      window.alert('Booking WhatsApp is not configured yet. Add the shop number with country code in app/page.tsx.')
+      return
+    }
     const details = [
       'Hi! I would like to enquire / book a cake 🎂',
       `Name: ${form.name}`,
